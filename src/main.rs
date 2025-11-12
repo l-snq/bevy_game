@@ -35,7 +35,7 @@ fn setup_prompt(mut commands: Commands) {
         Sprite::from_color(MENU_BOX, Vec2::ONE),
         Transform::default()
         .with_translation(Vec3::new(1.0, 1.0, 1.0))
-        .with_scale(Vec3::splat(8.0)),
+        .with_scale(Vec3::splat(80.0)),
     ));
 }
 
