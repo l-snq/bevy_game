@@ -39,26 +39,23 @@ fn setup_prompt(mut commands: Commands) {
     ));
 }
 
-// figure out how to query by making Struct Markers (such as struct PLayer)
-fn query_entities(mut commands: Commands, mut query: Query<(Entity, &mut Transform, )>) {
-    for (e, transform) in query.iter() {
-        if let Ok(entity) = commands.get_entity(e) {
-            println!("entity IDs: {:?}", entity.id());
-        }
-    }
-}
-
 fn player_physics(keys: Res<ButtonInput<KeyCode>>, 
     mut query: Query<(&mut Transform, &Player)>) {
 
     for (mut transform, Player) in &mut query {
             if keys.pressed(KeyCode::KeyW) {
                 transform.translation.y += 1.0;
-            } else if keys.pressed(KeyCode::KeyD) {
+            } 
+
+            if keys.pressed(KeyCode::KeyD) {
                 transform.translation.x += 1.0;
-            } else if keys.pressed(KeyCode::KeyA) {
+            } 
+
+            if keys.pressed(KeyCode::KeyA) {
                 transform.translation.x -= 1.0;
-            } else if keys.pressed(KeyCode::KeyS) {
+            } 
+
+            if keys.pressed(KeyCode::KeyS) {
                 transform.translation.y -= 1.0;
             }
     }
