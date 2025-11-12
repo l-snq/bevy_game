@@ -1,4 +1,4 @@
-use bevy::{ecs::world::EntityFetcher, prelude::*};
+use bevy::prelude::*;
 
 #[derive(Default, Component)]
 struct Player;
@@ -18,7 +18,7 @@ fn main() {
 }
 
 fn setup_player(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let mut spawn_coords = Vec3::new(1.0, 1.0, 1.0);
+    let spawn_coords = Vec3::new(1.0, 1.0, 1.0);
     commands.spawn(Camera2d);
 
     commands.spawn((
