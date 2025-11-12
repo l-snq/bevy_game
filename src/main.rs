@@ -31,13 +31,14 @@ fn setup_player(mut commands: Commands, asset_server: Res<AssetServer>) {
 const MENU_BOX: Color = Color::srgb(2.0, 3.0, 4.0);
 
 fn setup_prompt(mut commands: Commands) {
-    commands.spawn((
+    let player_id = commands.spawn((
         Sprite::from_color(MENU_BOX, Vec2::ONE),
         Transform::from_translation(Vec3::new(1.0, 1.0, 1.0)),
         Player {},
     ));
 }
 
+// figure out how to query by making Struct Markers (such as struct PLayer)
 fn query_entities(mut commands: Commands, mut query: Query<(Entity, &mut Transform)>) {
     for (e, transform) in query.iter() {
         if let Ok(entity) = commands.get_entity(e) {
