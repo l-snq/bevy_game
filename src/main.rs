@@ -32,7 +32,9 @@ const MENU_BOX: Color = Color::srgb(2.0, 3.0, 4.0);
 fn setup_prompt(mut commands: Commands) {
     let player_id = commands.spawn((
         Sprite::from_color(MENU_BOX, Vec2::ONE),
-        Transform::from_translation(Vec3::new(1.0, 1.0, 1.0)),
+        Transform::default()
+        .with_translation(Vec3::new(1.0, 1.0, 1.0))
+        .with_scale(Vec3::splat(8.0)),
         Player {},
     ));
 }
