@@ -24,6 +24,7 @@ fn setup_player(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn((
         Sprite::from_image(asset_server.load("wewuz.png")),
         Transform::from_translation(spawn_coords),
+        Player {},
     ));
 }
 
@@ -35,7 +36,6 @@ fn setup_prompt(mut commands: Commands) {
         Transform::default()
         .with_translation(Vec3::new(1.0, 1.0, 1.0))
         .with_scale(Vec3::splat(8.0)),
-        Player {},
     ));
 }
 
@@ -49,8 +49,9 @@ fn query_entities(mut commands: Commands, mut query: Query<(Entity, &mut Transfo
 }
 
 fn player_physics(keys: Res<ButtonInput<KeyCode>>, 
-    mut query: Query<(&Sprite, &mut Transform, Player)>) {
-    for (sprite, mut transform, Player) in &mut query {
+    mut query: Query<(&mut Transform, &Player)>) {
+
+    for (mut transform, Player) in &mut query {
             if keys.pressed(KeyCode::KeyW) {
                 transform.translation.y += 1.0;
             } else if keys.pressed(KeyCode::KeyD) {
