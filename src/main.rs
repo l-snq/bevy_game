@@ -1,7 +1,10 @@
 use bevy::prelude::*;
 
 #[derive(Default, Component)]
-struct Player;
+struct Player {
+    position: f32,
+    health: u8,
+}
 
 #[derive(Default, Component)]
 struct GameState {
@@ -19,14 +22,18 @@ fn main() {
 
 fn setup_player(mut commands: Commands, asset_server: Res<AssetServer>) {
     let spawn_coords = Vec3::new(1.0, 1.0, 1.0);
-    commands.spawn(Camera2d);
+    commands.spawn(Camera2d::default()
+        );
 
     commands.spawn((
         Sprite::from_image(asset_server.load("wewuz.png")),
         Transform::default()
             .with_translation(spawn_coords)
             .with_scale(Vec3::new(1.0, 1.0, 3.0)),
-        Player {},
+        Player {
+            position: 1.0,
+            health: 100,
+        },
     ));
 }
 
@@ -42,23 +49,27 @@ fn setup_prompt(mut commands: Commands) {
 }
 
 fn player_physics(keys: Res<ButtonInput<KeyCode>>, 
-    mut query: Query<(&mut Transform, &Player)>) {
+    mut query: Query<(&mut Transform, &mut Player)>) {
 
-    for (mut transform, Player) in &mut query {
+    for (mut transform, mut player) in &mut query {
             if keys.pressed(KeyCode::KeyW) {
                 transform.translation.y += 1.0;
+                player.position = transform.translation.y;
             } 
 
             if keys.pressed(KeyCode::KeyD) {
                 transform.translation.x += 1.0;
+                player.position = transform.translation.x;
             } 
 
             if keys.pressed(KeyCode::KeyA) {
                 transform.translation.x -= 1.0;
+                player.position = transform.translation.x;
             } 
 
             if keys.pressed(KeyCode::KeyS) {
                 transform.translation.y -= 1.0;
+                player.position = transform.translation.y;
             }
     }
 }
