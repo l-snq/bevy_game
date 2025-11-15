@@ -23,7 +23,9 @@ fn setup_player(mut commands: Commands, asset_server: Res<AssetServer>) {
 
     commands.spawn((
         Sprite::from_image(asset_server.load("wewuz.png")),
-        Transform::from_translation(spawn_coords),
+        Transform::default()
+            .with_translation(spawn_coords)
+            .with_scale(Vec3::new(1.0, 1.0, 3.0)),
         Player {},
     ));
 }
@@ -34,8 +36,8 @@ fn setup_prompt(mut commands: Commands) {
     commands.spawn((
         Sprite::from_color(MENU_BOX, Vec2::ONE),
         Transform::default()
-        .with_translation(Vec3::new(1.0, 1.0, 1.0))
-        .with_scale(Vec3::splat(80.0)),
+            .with_translation(Vec3::new(1.0, 1.0, 1.0))
+            .with_scale(Vec3::new(40.0, 40.0, 8.0)),
     ));
 }
 
